@@ -47,15 +47,19 @@ function draw() {
     strokeWeight(1);
     arc(0, height, 20 + 20 * i, 20 + 20 * i, PI + HALF_PI, TWO_PI);
 
-    if (mouseX==20 + 20 * i && mouseY==20 + 20 * i) {
-      console.log(info); // getting out all of the info of that first indice
-      console.log(info.title); // trace our path so that we can understand it
-      var title = info.title; // get out the value by the key name
-      console.log(results);
-    }
-
+    ///console.log(info); // getting out all of the info of that first indice
+    console.log(info.title); // trace our path so that we can understand it
+    var title = info.title; // get out the value by the key name
+    ///console.log(results);
+    ///text(title, )
 
   }
+}
 
-
+function mouseWheel(event) {
+  print(event.delta);
+  //move the square according to the vertical scroll amount
+  results.length-= event.delta;
+  //uncomment to block page scrolling
+  //return false;
 }
