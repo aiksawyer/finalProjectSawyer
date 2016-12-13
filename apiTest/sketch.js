@@ -3,6 +3,17 @@ var query;
 var font;
 var comicsData;
 var issue;
+var select = false;
+var i;
+/*
+  if you look, "results" is an array, 
+  thus our variable should be an array
+  and it should be global at this point
+  since getting the exact same value back 
+  in a loop doesn't make sense at this point
+  
+  */
+var results = [];
 
 function preload() {
   font = loadFont("data/BEBAS___.TTF");
@@ -12,14 +23,39 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(800, 500);
   noLoop();
-
+  // only need the info once, at this point
+  results = comicsData.data.results;
+  frameRate(1);
 }
 
 function draw() {
   textFont(font, 12);
-  var summary = comicsData.data.results.title;
-  text(summary, 50, 50);
+  //var results = comicsData.data.results;
+
+  console.log(results.length);
+  // title, is in the first indice of that array
+
+  for (i = 0; i < results.length; i++) {
+    var info = results[i];
+    //console.log(info); // getting out all of the info of that first indice
+    ///console.log(info.title); // trace our path so that we can understand it
+    ///var title = info.title; // get out the value by the key name
+    //console.log(results);
+    noFill();
+    strokeWeight(1);
+    arc(0, height, 20 + 20 * i, 20 + 20 * i, PI + HALF_PI, TWO_PI);
+
+    if (mouseX==20 + 20 * i && mouseY==20 + 20 * i) {
+      console.log(info); // getting out all of the info of that first indice
+      console.log(info.title); // trace our path so that we can understand it
+      var title = info.title; // get out the value by the key name
+      console.log(results);
+    }
+
+
+  }
+
 
 }
