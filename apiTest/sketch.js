@@ -24,7 +24,7 @@ function preload() {
 
 function setup() {
   createCanvas(800, 500);
-  noLoop();
+  background(50);
   // only need the info once, at this point
   results = comicsData.data.results;
   frameRate(1);
@@ -43,23 +43,35 @@ function draw() {
     ///console.log(info.title); // trace our path so that we can understand it
     ///var title = info.title; // get out the value by the key name
     //console.log(results);
-    noFill();
-    strokeWeight(1);
-    arc(0, height, 20 + 20 * i, 20 + 20 * i, PI + HALF_PI, TWO_PI);
-
+    
     ///console.log(info); // getting out all of the info of that first indice
-    console.log(info.title); // trace our path so that we can understand it
+    ///console.log(info.title); // trace our path so that we can understand it
     var title = info.title; // get out the value by the key name
-    ///console.log(results);
-    ///text(title, )
+    console.log(results);
+    fill(255);
+    stroke(1);
+    text(title, 5+10*i, height-30*i, 40, 40);
+    
+    if (i % 2 == 0) { ////if i/2 equal zero, arc will be red
+      noFill();
+      stroke(255, 0, 0);
+      strokeWeight(2);
+      arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
+    } else { ///if i/2 is not zero, arc will be gold
+      noFill();
+      stroke(255, 215, 0);
+      strokeWeight(2);
+      arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
+    }
 
   }
+  mouseWheel(event);
 }
 
 function mouseWheel(event) {
   print(event.delta);
   //move the square according to the vertical scroll amount
-  results.length-= event.delta;
+  event.delta = -results.length;
   //uncomment to block page scrolling
   //return false;
 }
