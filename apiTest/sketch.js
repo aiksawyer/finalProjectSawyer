@@ -2,8 +2,6 @@ var url;
 var query;
 var font;
 var comicsData;
-var issue;
-var select = false;
 var i;
 /*
   if you look, "results" is an array, 

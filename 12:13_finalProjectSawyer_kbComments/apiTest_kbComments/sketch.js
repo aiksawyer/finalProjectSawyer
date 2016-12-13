@@ -43,28 +43,28 @@ function draw() {
   // title, is in the first indice of that array
 
   whereAmI();
-  
-  
+
+
   // see where the mouse is
   // in relation to your arcs  <---  maybe just try effecting the fill color first
   // then *just* draw those arcs  // then you can figure out which to show
   // check a function below
-  
-  for (i = 0; i < HOW_MANY_ARCS_ARE_WE_SHOWING + 1; i++){    //results.length; i++) {  // based on where the mouse is ONLY the ones you need
+
+  for (i = 0; i < HOW_MANY_ARCS_ARE_WE_SHOWING + 1; i++) { //results.length; i++) {  // based on where the mouse is ONLY the ones you need
     var info = results[i];
     //console.log(info); // getting out all of the info of that first indice
     ///console.log(info.title); // trace our path so that we can understand it
     ///var title = info.title; // get out the value by the key name
     //console.log(results);
-    
+
     ///console.log(info); // getting out all of the info of that first indice
     ///console.log(info.title); // trace our path so that we can understand it
     var title = info.title; // get out the value by the key name
     console.log(results);
     fill(255);
     stroke(1);
-    text(title, 5+10*i, height-30*i, 40, 40);
-    
+    text(title, 5 + 10 * i, height - 30 * i, 40, 40);
+
     if (i % 2 == 0) { ////if i/2 equal zero, arc will be red
       noFill();
       stroke(255, 0, 0);
@@ -79,18 +79,19 @@ function draw() {
 
 
   }
-  
+  whereAmI();
+
 
   //mouseWheel(event);
 }
 
 function whereAmI(mouseX, mouseY) {
   // redraw background here
-  var x_initial = 10;
-  var y_intital = 90;
+  var x1 = 10;
+  var y1 = 90;
   var x2 = mouseX;
   var y2 = mouseY;
-
+  stroke(255);
   line(x1, y1, x2, y2);
   ellipse(x1, y1, 7, 7);
   ellipse(x2, y2, 7, 7);
@@ -98,17 +99,17 @@ function whereAmI(mouseX, mouseY) {
   // d is the length of the line
   // the distance from point 1 to point 2.
   var d = int(dist(x1, y1, x2, y2));
-  
-    // Let's write d along the line we are drawing!
+
+  // Let's write d along the line we are drawing!
   push();
-  translate( (x1+x2)/2, (y1+y2)/2 );
-  rotate( atan2(y2-y1,x2-x1) );
-  text(nfc(d,1,1), 0, -5);
+  translate((x1 + x2) / 2, (y1 + y2) / 2);
+  rotate(atan2(y2 - y1, x2 - x1));
+  text(nfc(d, 1, 1), 0, -5);
   pop();
   // Fancy!
 
 
-  switch (d){
+  /*switch (d){
     case (d > 10 && d < 50):
       //show arc 1
       // control value
@@ -119,7 +120,7 @@ function whereAmI(mouseX, mouseY) {
     case (.....);
     break;
     
-  }
+  }*/
 
 
 
