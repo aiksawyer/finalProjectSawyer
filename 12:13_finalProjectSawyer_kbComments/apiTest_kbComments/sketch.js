@@ -5,6 +5,11 @@ var comicsData;
 var issue;
 var select = false;
 var i;
+var info = [];
+
+var HOW_MANY_ARCS_ARE_WE_SHOWING = 0;
+
+var whichArc;
 /*
   if you look, "results" is an array, 
   thus our variable should be an array
@@ -37,7 +42,15 @@ function draw() {
   console.log(results.length);
   // title, is in the first indice of that array
 
-  for (i = 0; i < results.length; i++) {
+  whereAmI();
+  
+  
+  // see where the mouse is
+  // in relation to your arcs  <---  maybe just try effecting the fill color first
+  // then *just* draw those arcs  // then you can figure out which to show
+  // check a function below
+  
+  for (i = 0; i < HOW_MANY_ARCS_ARE_WE_SHOWING + 1; i++){    //results.length; i++) {  // based on where the mouse is ONLY the ones you need
     var info = results[i];
     //console.log(info); // getting out all of the info of that first indice
     ///console.log(info.title); // trace our path so that we can understand it
@@ -64,14 +77,61 @@ function draw() {
       arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
     }
 
+
   }
-  ///mouseWheel(event);
+  
+
+  //mouseWheel(event);
 }
 
-/*function mouseWheel(event) {
+function whereAmI(mouseX, mouseY) {
+  // redraw background here
+  var x_initial = 10;
+  var y_intital = 90;
+  var x2 = mouseX;
+  var y2 = mouseY;
+
+  line(x1, y1, x2, y2);
+  ellipse(x1, y1, 7, 7);
+  ellipse(x2, y2, 7, 7);
+
+  // d is the length of the line
+  // the distance from point 1 to point 2.
+  var d = int(dist(x1, y1, x2, y2));
+  
+    // Let's write d along the line we are drawing!
+  push();
+  translate( (x1+x2)/2, (y1+y2)/2 );
+  rotate( atan2(y2-y1,x2-x1) );
+  text(nfc(d,1,1), 0, -5);
+  pop();
+  // Fancy!
+
+
+  switch (d){
+    case (d > 10 && d < 50):
+      //show arc 1
+      // control value
+     HOW_MANY_ARCS_ARE_WE_SHOWING = 1;
+     //load the data to prep for possible click
+     info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
+      break;
+    case (.....);
+    break;
+    
+  }
+
+
+
+
+}
+
+/*
+function mouseWheel(event) {
   print(event.delta);
   //move the square according to the vertical scroll amount
   event.delta = -results.length;
   //uncomment to block page scrolling
   //return false;
-}*/
+}
+*/
