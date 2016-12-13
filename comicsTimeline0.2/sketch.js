@@ -11,25 +11,27 @@ function preload() {
   fontBig = loadFont("data/BEBAS___.TTF");
   ///fontSmall = loadFont("data/Helvetica.dfont");
   console.log('got fonts');
+  var url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1480980033&startYear=2009&orderBy=startYear&limit=5&apikey=4f804381e438abd7d337fe90bec41e4a&hash=cb22bb8e083ced8a01958588add95180';
+  comicsData = loadJSON(url);
+  console.log("got api");
+
+
 }
 
 function setup() {
   createCanvas(800, 500);
   background(50);
-
+  results = comicsData.data.results;
 }
 
 function draw() {
   background(50);
-  mouseLoc();
-  var url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1480980033&startYear=2009&orderBy=startYear&limit=5&apikey=4f804381e438abd7d337fe90bec41e4a&hash=cb22bb8e083ced8a01958588add95180';
-  comicsData = loadJSON(url);
-  console.log("got api");
-  results = comicsData.data.results;
   console.log(results.length);
   var info = results[i];
-  console.log(info.title);
-  for (i = 0; i < HOW_MANY_ARCS_ARE_WE_SHOWING + 1; i++) { //results.length; i++) {  // based on where the mouse is ONLY the ones you need
+  ///console.log(info.title);
+
+  mouseLoc();
+  for (i = 0; i < results.length; i++) { //results.length; i++) {  // based on where the mouse is ONLY the ones you need
 
 
     //console.log(info); // getting out all of the info of that first indice
@@ -67,10 +69,6 @@ function mouseLoc() { ///this function reads the location of user's cursor
   var x2 = mouseX;
   var y2 = mouseY;
 
-  line(x1, y1, x2, y2);
-  ellipse(x1, y1, 7, 7);
-  ellipse(x2, y2, 7, 7);
-
   // d is the length of the line
   // the distance from point 1 to point 2.
   var d = int(dist(x1, y1, x2, y2));
@@ -86,40 +84,44 @@ function mouseLoc() { ///this function reads the location of user's cursor
     case (d > 10 && d < 50):
       //show arc 1
       // control value
-      HOW_MANY_ARCS_ARE_WE_SHOWING = 1;
+      fill(250, 0);
       //load the data to prep for possible click
-      info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
+      ///info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
       break;
-      case (d > 50 && d < 100):
+    case (d > 50 && d < 100):
       //show arc 1
       // control value
-      HOW_MANY_ARCS_ARE_WE_SHOWING = 2;
+      fill(250, 250);
       //load the data to prep for possible click
-      info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
+      ///info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
       break;
-      case (d > 100 && d < 150):
+    case (d > 100 && d < 150):
       //show arc 1
       // control value
-      HOW_MANY_ARCS_ARE_WE_SHOWING = 3;
+       fill(0, 0);
       //load the data to prep for possible click
-      info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
+      ////info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
       break;
-      case (d > 150 && d < 200):
+    case (d > 150 && d < 200):
       //show arc 1
       // control value
-      HOW_MANY_ARCS_ARE_WE_SHOWING = 4;
+       fill(250, 250);
       //load the data to prep for possible click
-      info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
+      ///info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
       break;
-      case (d > 200 && d < 250):
+    case (d > 200 && d < 250):
       //show arc 1
       // control value
-      HOW_MANY_ARCS_ARE_WE_SHOWING = 5;
+       fill(250, 0);
       //load the data to prep for possible click
-      info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
+      ///info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
       break;
 
   }
+  
+  line(x1, y1, x2, y2);
+  ellipse(x1, y1, 7, 7);
+  ellipse(x2, y2, 7, 7);
 
 
 
