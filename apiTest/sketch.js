@@ -1,5 +1,4 @@
 var url;
-var query;
 var font;
 var comicsData;
 var i;

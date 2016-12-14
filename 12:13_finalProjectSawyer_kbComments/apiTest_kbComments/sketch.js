@@ -109,7 +109,7 @@ function whereAmI(mouseX, mouseY) {
   // Fancy!
 
 
-  /*switch (d){
+  switch (d){
     case (d > 10 && d < 50):
       //show arc 1
       // control value
@@ -120,7 +120,7 @@ function whereAmI(mouseX, mouseY) {
     case (.....);
     break;
     
-  }*/
+  }
 
 
 
