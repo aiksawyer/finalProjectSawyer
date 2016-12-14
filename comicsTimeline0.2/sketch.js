@@ -4,7 +4,7 @@ var i;
 var instruction;
 var url;
 var results = [];
-var info = [];
+
 var howManyArcs = 5;
 
 
@@ -13,6 +13,9 @@ function preload() {
   fontSmall = loadFont("data/Solomon - thin.ttf")
 
   console.log('got fonts');
+  
+  var url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1481680881&titleStartsWith=Iron%20Man&contains=comic&orderBy=startYear&limit=5&apikey=4f804381e438abd7d337fe90bec41e4a&hash=3e0407f3ac78d02589a8274dc7d50977';
+  comicsData = loadJSON(url);
 
 }
 
@@ -32,9 +35,10 @@ function draw() {
   pop();
 
   mouseLoc();
+  drawArcs();
 
 
-  for (i = 0; i < howManyArcs; i++) {
+  /*for (i = 0; i < howManyArcs; i++) {
     url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1481680881&titleStartsWith=Iron%20Man&contains=comic&orderBy=startYear&limit=100&apikey=4f804381e438abd7d337fe90bec41e4a&hash=3e0407f3ac78d02589a8274dc7d50977';
     comicsData = loadJSON(url);
     console.log("got api");
@@ -49,7 +53,7 @@ function draw() {
       stroke(255, 0, 0);
       strokeWeight(2);
       arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
-     /// text(title, 50 + 30 * i, 50 + 30 * i, 50, 50);
+      /// text(title, 50 + 30 * i, 50 + 30 * i, 50, 50);
 
     } else { ///if i/2 is not zero, arc will be gold
       noFill();
@@ -59,7 +63,7 @@ function draw() {
       ///text(title, 50 + 30 * i, 50 + 30 * i, 50, 50);
     }
 
-  }
+  }*/
 }
 
 function mouseLoc() { ///this function reads the location of user's cursor
@@ -102,19 +106,20 @@ function mouseLoc() { ///this function reads the location of user's cursor
   } else if (d > 120 && d < 150) {
     howManyArcs = 5;
   }
-
 }
 
 
-function drawArcs(){
+function drawArcs() {
+  results = comicsData.data.results;
+  console.log(results.length);
+  var info = results[howManyArcs];
+  console.log(info);
+  ///var title = info.title;
+  
+  
   for (i = 0; i < howManyArcs; i++) {
-    url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1481680881&titleStartsWith=Iron%20Man&contains=comic&orderBy=startYear&limit=100&apikey=4f804381e438abd7d337fe90bec41e4a&hash=3e0407f3ac78d02589a8274dc7d50977';
-    comicsData = loadJSON(url);
-    console.log("got api");
-    //results = comicsData.data.results;
-    //console.log('result length is ' + results.length);
-    //info = results[howManyArcs];
-    ///var title = info.title;
+   // var info = results[howManyArcs];
+   /// var title = info.title;
 
 
     if (i % 2 == 0) { ////if i/2 equal zero, arc will be red
@@ -122,14 +127,14 @@ function drawArcs(){
       stroke(255, 0, 0);
       strokeWeight(2);
       arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
-     /// text(title, 50 + 30 * i, 50 + 30 * i, 50, 50);
+      //text(title, 50 + 30 * howManyArcs, 50 + 30 * howManyArcs, 50, 50);
 
     } else { ///if i/2 is not zero, arc will be gold
       noFill();
       stroke(255, 215, 0);
       strokeWeight(2);
       arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
-      ///text(title, 50 + 30 * i, 50 + 30 * i, 50, 50);
+      ///text(title, 50 + 30 * howManyArcs, 50 + 30 * howManyArcs, 50, 50);
     }
 
   }

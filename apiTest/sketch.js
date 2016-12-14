@@ -14,7 +14,7 @@ var results = [];
 
 function preload() {
   font = loadFont("data/BEBAS___.TTF");
-  var url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1480980033&startYear=2009&orderBy=startYear&limit=100&apikey=4f804381e438abd7d337fe90bec41e4a&hash=cb22bb8e083ced8a01958588add95180';
+  url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1481680881&titleStartsWith=Iron%20Man&contains=comic&orderBy=startYear&limit=5&apikey=4f804381e438abd7d337fe90bec41e4a&hash=3e0407f3ac78d02589a8274dc7d50977';
   comicsData = loadJSON(url);
   console.log("done");
 }
@@ -47,7 +47,7 @@ function draw() {
     ///console.log(results);
     fill(255);
     stroke(1);
-    text(title, 5+10*i, height-30*i, 40, 40);
+    text(title, 5+10*i, height-30*i, 100, 100);
     
     if (i % 2 == 0) { ////if i/2 equal zero, arc will be red
       noFill();

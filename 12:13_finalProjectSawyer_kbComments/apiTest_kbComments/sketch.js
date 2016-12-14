@@ -118,9 +118,7 @@ function whereAmI(mouseX, mouseY) {
      //load the data to prep for possible click
      info = results[HOW_MANY_ARCS_ARE_WE_SHOWING];
       break;
-    case (.....);
-    break;
-    
+  
   }
 
 
