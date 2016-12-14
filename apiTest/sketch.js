@@ -44,7 +44,7 @@ function draw() {
     ///console.log(info); // getting out all of the info of that first indice
     ///console.log(info.title); // trace our path so that we can understand it
     var title = info.title; // get out the value by the key name
-    console.log(results);
+    ///console.log(results);
     fill(255);
     stroke(1);
     text(title, 5+10*i, height-30*i, 40, 40);

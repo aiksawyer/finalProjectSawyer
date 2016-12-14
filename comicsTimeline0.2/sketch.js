@@ -2,7 +2,9 @@ var fontBig, fontSmall;
 var comicsData;
 var i;
 var instruction;
-
+var url;
+var results = [];
+var info = [];
 var howManyArcs = 5;
 
 
@@ -23,19 +25,23 @@ function draw() {
   background(50);
   instruction = 'Move and click your mouse to explore Iron Man comics over the years.';
   textFont(fontSmall, 14);
-  //text(instruction, 30, 30, 200, 50);
+  push();
+  stroke(250);
+  fill(250);
+  text(instruction, 30, 30, 200, 50);
+  pop();
 
   mouseLoc();
 
 
-  for (i = 0; i < howManyArcs + 1; i++) {
-    var url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1480980033&startYear=2009&orderBy=startYear&limit=5&apikey=4f804381e438abd7d337fe90bec41e4a&hash=cb22bb8e083ced8a01958588add95180';
+  for (i = 0; i < howManyArcs; i++) {
+    url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1481680881&titleStartsWith=Iron%20Man&contains=comic&orderBy=startYear&limit=100&apikey=4f804381e438abd7d337fe90bec41e4a&hash=3e0407f3ac78d02589a8274dc7d50977';
     comicsData = loadJSON(url);
     console.log("got api");
-    var results = [];
-    ///results = comicsData.data.results;
-    console.log(results.length);
-    ///var info = results[i];
+    //results = comicsData.data.results;
+    //console.log('result length is ' + results.length);
+    //info = results[howManyArcs];
+    ///var title = info.title;
 
 
     if (i % 2 == 0) { ////if i/2 equal zero, arc will be red
@@ -43,11 +49,14 @@ function draw() {
       stroke(255, 0, 0);
       strokeWeight(2);
       arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
+     /// text(title, 50 + 30 * i, 50 + 30 * i, 50, 50);
+
     } else { ///if i/2 is not zero, arc will be gold
       noFill();
       stroke(255, 215, 0);
       strokeWeight(2);
       arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
+      ///text(title, 50 + 30 * i, 50 + 30 * i, 50, 50);
     }
 
   }
@@ -79,14 +88,49 @@ function mouseLoc() { ///this function reads the location of user's cursor
   ellipse(x2, y2, 7, 7);
   //console.log('reading loc');
 
-  if (d > 0 && d < 100) {
+  if (d > 0 && d < 30) {
     console.log('close to edge');
     howManyArcs = 1;
-  } else if (d > 100 && d < 150) {
+  } else if (d > 30 && d < 60) {
     console.log('im here');
-    howManyArcs = 2
-  } else if (d > 150 && d < 300) {
+    howManyArcs = 2;
+  } else if (d > 60 && d < 90) {
     console.log('im there');
     howManyArcs = 3;
+  } else if (d > 90 && d < 120) {
+    howManyArcs = 4;
+  } else if (d > 120 && d < 150) {
+    howManyArcs = 5;
+  }
+
+}
+
+
+function drawArcs(){
+  for (i = 0; i < howManyArcs; i++) {
+    url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1481680881&titleStartsWith=Iron%20Man&contains=comic&orderBy=startYear&limit=100&apikey=4f804381e438abd7d337fe90bec41e4a&hash=3e0407f3ac78d02589a8274dc7d50977';
+    comicsData = loadJSON(url);
+    console.log("got api");
+    //results = comicsData.data.results;
+    //console.log('result length is ' + results.length);
+    //info = results[howManyArcs];
+    ///var title = info.title;
+
+
+    if (i % 2 == 0) { ////if i/2 equal zero, arc will be red
+      noFill();
+      stroke(255, 0, 0);
+      strokeWeight(2);
+      arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
+     /// text(title, 50 + 30 * i, 50 + 30 * i, 50, 50);
+
+    } else { ///if i/2 is not zero, arc will be gold
+      noFill();
+      stroke(255, 215, 0);
+      strokeWeight(2);
+      arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
+      ///text(title, 50 + 30 * i, 50 + 30 * i, 50, 50);
+    }
+
   }
 }
