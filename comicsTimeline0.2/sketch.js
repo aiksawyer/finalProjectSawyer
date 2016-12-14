@@ -1,11 +1,9 @@
 var fontBig, fontSmall;
 var comicsData;
 var i;
-var info = [];
-var results = [];
 var instruction;
 
-var HOW_MANY_ARCS_ARE_WE_SHOWING = 0;
+var howManyArcs = 5;
 
 
 function preload() {
@@ -25,9 +23,34 @@ function draw() {
   background(50);
   instruction = 'Move and click your mouse to explore Iron Man comics over the years.';
   textFont(fontSmall, 14);
-  text(instruction, 30, 30, 200, 50);
+  //text(instruction, 30, 30, 200, 50);
 
   mouseLoc();
+
+
+  for (i = 0; i < howManyArcs + 1; i++) {
+    var url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1480980033&startYear=2009&orderBy=startYear&limit=5&apikey=4f804381e438abd7d337fe90bec41e4a&hash=cb22bb8e083ced8a01958588add95180';
+    comicsData = loadJSON(url);
+    console.log("got api");
+    var results = [];
+    ///results = comicsData.data.results;
+    console.log(results.length);
+    ///var info = results[i];
+
+
+    if (i % 2 == 0) { ////if i/2 equal zero, arc will be red
+      noFill();
+      stroke(255, 0, 0);
+      strokeWeight(2);
+      arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
+    } else { ///if i/2 is not zero, arc will be gold
+      noFill();
+      stroke(255, 215, 0);
+      strokeWeight(2);
+      arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
+    }
+
+  }
 }
 
 function mouseLoc() { ///this function reads the location of user's cursor
@@ -49,20 +72,21 @@ function mouseLoc() { ///this function reads the location of user's cursor
   text(d, mouseX, mouseY);
   pop();
   // Fancy!
-
+  fill(250);
+  stroke(250);
   line(x1, y1, x2, y2);
   ellipse(x1, y1, 7, 7);
   ellipse(x2, y2, 7, 7);
   //console.log('reading loc');
 
-  switch (d) {
-    case (d > 100 && d < 150):
-      console.log('im here');
-      break;
-    case (d > 150 && d < 300):
-      console.log('im there');
-      break;
+  if (d > 0 && d < 100) {
+    console.log('close to edge');
+    howManyArcs = 1;
+  } else if (d > 100 && d < 150) {
+    console.log('im here');
+    howManyArcs = 2
+  } else if (d > 150 && d < 300) {
+    console.log('im there');
+    howManyArcs = 3;
   }
-
-
 }
