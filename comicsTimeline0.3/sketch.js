@@ -94,28 +94,26 @@ function drawArcs() { ///too avoid slowing the process, start loading data right
       textFont(fontSmall, 15);
       text(title, 50 + 30 * howManyArcs, 50 + 30 * howManyArcs, 100, 50);
       pop();
-      
-       if(mouseIsPressed){
-         /////text box with info
+
+      if (mouseIsPressed) {
+        /////text box with info
         var description = info.description;
         var startYear = info.startYear;
         var endYear = info.endYear;
-        
+
         textFont(fontSmall, 15);
-        text(title,500,200, 200, 200);
+        text(title, 500, 170, 200, 200);
         push();
         fill(250);
         strokeWeight(0);
         textFont(fontSmall, 12);
         text(description, 500, 220, 200, 200);
-        if(description == null){
-          description = 'Description is top secret';
-        }
+        text(startYear + ' – ' + endYear, 500, 200, 200, 200);
         pop();
       }
-      
-      
-      
+
+
+
     } else { ///if i/2 is not zero, arc will be gold
       for (z = 0; z < howManyArcs; z++) { ///little for loop to only load  the info i need
         var info = results[z];
@@ -129,22 +127,21 @@ function drawArcs() { ///too avoid slowing the process, start loading data right
       textFont(fontSmall, 15);
       text(title, 50 + 30 * howManyArcs, 50 + 30 * howManyArcs, 100, 50);
       pop();
-      
-      if(mouseIsPressed){
-         /////text box with info
+
+      if (mouseIsPressed) {
+        /////text box with info
         var description = info.description;
         var startYear = info.startYear;
         var endYear = info.endYear;
-        if(description == null){
-          description = 'This description is top secret.';
-        }
         textFont(fontSmall, 15);
-        text(title,500,200, 200, 200);
+        text(title, 500, 170, 200, 200);
         push();
         fill(250);
         strokeWeight(0);
         textFont(fontSmall, 12);
         text(description, 500, 220, 200, 200);
+        text(startYear + ' – ' + endYear, 500, 200, 200, 200);
+        text()
         pop();
       }
     }
