@@ -10,7 +10,7 @@ var howManyArcs = 5;
 function preload() {
   fontBig = loadFont("data/BEBAS___.TTF");
   fontSmall = loadFont("data/Solomon - thin.ttf")
-  console.log('got fonts');
+  ///console.log('got fonts');
   var url = 'https://gateway.marvel.com/v1/public/characters/1009368/series?ts=1481680881&titleStartsWith=Iron%20Man&contains=comic&orderBy=startYear&limit=5&apikey=4f804381e438abd7d337fe90bec41e4a&hash=3e0407f3ac78d02589a8274dc7d50977';
   comicsData = loadJSON(url);
 }
@@ -26,12 +26,12 @@ function draw() {
   textFont(fontSmall, 14);
   push();
   stroke(250);
+  strokeWeight(0);
   fill(250);
   text(instruction, 30, 30, 200, 50);
   pop();
   mouseLoc();
   drawArcs();
-
 
 }
 
@@ -100,15 +100,23 @@ function drawArcs() { ///too avoid slowing the process, start loading data right
         var description = info.description;
         var startYear = info.startYear;
         var endYear = info.endYear;
-
+        var nullDesc = 'This description is top secret.'
         textFont(fontSmall, 15);
         text(title, 500, 170, 200, 200);
         push();
         fill(250);
         strokeWeight(0);
         textFont(fontSmall, 12);
-        text(description, 500, 220, 200, 200);
+        if(description == null){
+          text(nullDesc, 500, 220, 200, 200);
+          console.log('didthis');
+        }
+        else{
+          text(description, 500, 220, 200, 200);
+        }
         text(startYear + ' – ' + endYear, 500, 200, 200, 200);
+        ///text(description, 500, 220, 200, 200);
+        text()
         pop();
       }
 
@@ -133,17 +141,25 @@ function drawArcs() { ///too avoid slowing the process, start loading data right
         var description = info.description;
         var startYear = info.startYear;
         var endYear = info.endYear;
+        var nullDesc = 'This description is top secret.'
         textFont(fontSmall, 15);
         text(title, 500, 170, 200, 200);
         push();
         fill(250);
         strokeWeight(0);
         textFont(fontSmall, 12);
-        text(description, 500, 220, 200, 200);
+        if(description == null){
+          text(nullDesc, 500, 220, 200, 200);  
+        }
+        else{
+          text(description, 500, 220, 200, 200);
+        }
         text(startYear + ' – ' + endYear, 500, 200, 200, 200);
+        ///text(description, 500, 220, 200, 200);
         text()
         pop();
       }
     }
   }
 }
+
