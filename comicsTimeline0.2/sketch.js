@@ -90,28 +90,34 @@ function drawArcs() { ///too avoid slowing the process, start loading data right
   console.log(results.length);
 
 
-  for (i = 0; i < howManyArcs; i++) { //drawing arcs according to api
+  for (i = 0; i < howManyArcs + 1; i++) { //drawing arcs according to api
 
 
     if (i % 2 == 0) { ////if i/2 equal zero, arc will be red
       var info = results[i];
       ///console.log(info); ///trace back to check
 
-      var title = info.title; ////wrong reference????
+      //var title = info.title; ////wrong reference????
       noFill();
+
       stroke(255, 0, 0);
       strokeWeight(2);
       arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
+      push();
+      var title = info.title;
 
       text(title, 50 + 30 * howManyArcs, 50 + 30 * howManyArcs, 100, 50);
+      pop();
 
     } else { ///if i/2 is not zero, arc will be gold
       noFill();
       stroke(255, 215, 0);
       strokeWeight(2);
-      arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
-      text(title, 50 + 30 * howManyArcs, 50 + 30 * howManyArcs, 100, 50);
-    }
 
+      arc(0, height, 50 + 30 * i, 50 + 30 * i, PI + HALF_PI, TWO_PI);
+      push();
+      text(title, 50 + 30 * howManyArcs, 50 + 30 * howManyArcs, 100, 50);
+      pop();
+    }
   }
 }
