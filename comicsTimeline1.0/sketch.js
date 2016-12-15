@@ -1,19 +1,19 @@
 ///defining and instantiating global variables
 
 var fontBig, fontSmall;
-var comicsData;
+var comicsData; ///this is where I load the API
 var i;
 var instruction;
 var url;
-var results = [];
-var info = [];
+var results = []; /// this is where I load the API arrays
+var info = [];  ///this is where I load arrays within the API arrays
 var howManyArcs = 5;
-var era1 = 'GOLDEN AGE';
+var era1 = 'GOLDEN AGE'; ///different eras of omics
 var era2 = 'SILVER AGE';
 var era3 = 'BRONZE AGE';
 var era4 = 'MODERN AGE';
 
-function preload() {
+function preload() { //preloading fonts and comics data. not a lot of data so its okay to load it here
   fontBig = loadFont("data/BEBAS___.TTF");
   fontSmall = loadFont("data/Solomon - thin.ttf")
     ///console.log('got fonts');
@@ -22,23 +22,23 @@ function preload() {
   comicsData = loadJSON(url);
 }
 
-function setup() {
+function setup() { ///setting up the canvas
   createCanvas(800, 500);
-  background(50);
+  background(50); 
 }
 
-function draw() {
-  instruction = 'Move and click your mouse to explore Iron Man comics over the years.';
+function draw() { //basic draws
+  instruction = 'Move and click your mouse to explore Iron Man comics over the years.'; //instructions for user
   background(50);
   textFont(fontSmall, 14);
-  push();
+  push();  ////push and pop so that this text has unique properties
   stroke(250);
   strokeWeight(0);
   fill(250);
   text(instruction, 30, 30, 200, 50);
   pop();
-  mouseLoc();
-  drawArcs();
+  mouseLoc();  ///function mouseLoc is called
+  drawArcs();  ///function drawArcs is called
 
 }
 
@@ -49,7 +49,7 @@ function mouseLoc() { ///this function reads the location of user's cursor
   var y1 = height;
   var x2 = mouseX;
   var y2 = mouseY;
-
+  ///this code is referenced from p5.org/references
   // d is the length of the line
   // the distance from point 1 to point 2.
   var d = int(dist(x1, y1, x2, y2));
@@ -57,15 +57,13 @@ function mouseLoc() { ///this function reads the location of user's cursor
   push();
   fill(255);
   stroke(255);
-  ///text(d, mouseX, mouseY);
-  pop();
-  fill(250);
-  stroke(250);
+  ///text(d, mouseX, mouseY); ///used this to visually check the distance
   ///line(x1, y1, x2, y2);
   //console.log('reading loc');
 
-  if (d > 0 && d < 10) {
-    console.log('close to edge');
+  if (d > 0 && d < 10) { /////ok this part i hate but I had to hard code it
+                          /////didn't know how to loop increments of 10 depending on distance
+    ///console.log('close to edge'); ///checking for reaction
     howManyArcs = 1;
   } else if (d > 10 && d < 20) {
     ///console.log('im here');
@@ -149,54 +147,54 @@ function mouseLoc() { ///this function reads the location of user's cursor
   } else if (d > 255 && d < 260) {
     howManyArcs = 40;
   } else if (d > 260 && d < width) {
-    howManyArcs = 41;
+    howManyArcs = 41;  ///as many arcs as there are results in the API
   }
 }
 
 
 function drawArcs() { ///too avoid slowing the process, start loading data right before drawing arcs
   results = comicsData.data.results;
-  console.log(results.length);
+  console.log(results.length);//checking for length
   for (i = 0; i < howManyArcs; i++) { //drawing arcs according to api
-    if (howManyArcs <= 10 && howManyArcs > 0) {
-      push();
+    if (howManyArcs <= 10 && howManyArcs > 0) { ///these ifs write the according era
+      push(); //push and pop for unique text
       textFont(fontBig, 70);
       strokeWeight(1);
       fill(255, 215, 0);
       stroke(255, 215, 0);
       text(era1, 300, 50, 500, 500);
-      console.log('reading era');
+      ///console.log('reading era'); //checking
       pop();
 
     }
     if (howManyArcs > 10 && howManyArcs <=20) {
-      push();
+      push();//push and pop for unique text
       textFont(fontBig, 70);
       strokeWeight(1);
       fill(192,192,192);
       stroke(192,192,192);
       text(era2, 300, 50, 500, 500);
-      console.log('reading era');
+      ///console.log('reading era');///checking
       pop();
     }
     if (howManyArcs > 20 && howManyArcs <= 30) {
-      push();
+      push();//push and pop for unique text
       textFont(fontBig, 70);
       strokeWeight(1);
       fill(205, 127, 50);
       stroke(205, 127, 50);
       text(era3, 300, 50, 500, 500);
-      console.log('reading era');
+      ///console.log('reading era'); checking
       pop();
 
     } if (howManyArcs > 30 && howManyArcs < 42) {
-      push();
+      push();//push and pop for unique text
       textFont(fontBig, 70);
       strokeWeight(1);
       fill(255, 248, 220);
       stroke(255, 248, 220);
       text(era4, 300, 50, 500, 500);
-      console.log('reading era');
+      ////console.log('reading era'); checking
       pop();
     }
 
@@ -210,7 +208,7 @@ function drawArcs() { ///too avoid slowing the process, start loading data right
       noFill();
       stroke(255, 0, 0);
       strokeWeight(2);
-      arc(0, height, 50 + 13 * i, 50 + 13 * i, PI + HALF_PI, TWO_PI);
+      arc(0, height, 50 + 13 * i, 50 + 13 * i, PI + HALF_PI, TWO_PI); ///the arcs
       push();
       textFont(fontSmall, 15);
       text(title, mouseX + z, mouseY - z, 100, 50);
@@ -219,19 +217,19 @@ function drawArcs() { ///too avoid slowing the process, start loading data right
 
 
 
-      if (mouseIsPressed) {
+      if (mouseIsPressed) { ///this mousePressed is calling a text box with info about a comics
         /////text box with info
         var description = info.description;
-        var startYear = info.startYear;
+        var startYear = info.startYear; ///these are pulled from API
         var endYear = info.endYear;
         var nullDescription = 'A billionaire industrialist and genius inventor, Tony Stark, is conducting weapons tests overseas, but terrorists kidnap him to force him to build a devastating weapon. Instead, he builds an armored suit and upends his captors. Returning to America, Stark refines the suit and uses it to combat crime and terrorism.';
         textFont(fontSmall, 15);
-        text(title, 400, 170, 300, 200);
-        push();
+        text(title, 400, 170, 300, 200); ///title of a comic
+        push(); ///unique text again
         fill(250);
         strokeWeight(0);
-        textFont(fontSmall, 12);
-        if (description === null) {
+        textFont(fontSmall, 14);
+        if (description === null) { ///when description in API is null, I put in custom description
           text(nullDescription, 400, 220, 300, 200);
         } else {
           text(description, 400, 220, 300, 200);
@@ -256,8 +254,6 @@ function drawArcs() { ///too avoid slowing the process, start loading data right
       textFont(fontSmall, 15);
       text(title, mouseX + z, mouseY - z, 100, 50);
       pop();
-
-
     }
   }
 }
